@@ -29,7 +29,7 @@
 
                             <div class="col-md-6">
                                 <input id="lname" type="text" class="form-control" name="lname" value="{{ old('lname') }}">
-                                <input class="form-control" type="hidden" name="role" id="role" value="normal"/>
+                                
                                 @if ($errors->has('lname'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('lname') }}</strong>
@@ -77,6 +77,18 @@
                                         <strong>{{ $errors->first('phoneNo') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
+                            <label for="location" class="col-md-4 control-label">Register As:</label>
+
+                            <div class="col-md-6">
+                                 <select class="form-control" id="role" name="role" required="true" value="{{ old('role') }}" style="background-color : inherit">
+                                     <option  value="">Select Role</option>
+                                      <option  value="normal">User</option>
+                                      <option  value="agent">Admin</option>
+                                 </select>
                             </div>
                         </div>
 

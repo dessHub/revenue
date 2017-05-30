@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('./auth/login');
 });
 
 Route::auth();
@@ -32,8 +32,9 @@ $this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
 $this->post('password/reset', 'Auth\PasswordController@reset');
 
 // App Routes
-$this->get('repay', 'ReportController@repay');
-$this->post('property', 'ReportController@postProperty');
+$this->get('pay', 'PropertyController@repay');;
+$this->get('propertyform', 'PropertyController@propertyform');
+$this->post('create', 'PropertyController@postProperty');
 $this->get('myreports/{user_id}', 'ReportController@myReports');
 $this->get('pending', 'ReportController@viewPending');
 $this->post('receive', 'ReportController@receive');

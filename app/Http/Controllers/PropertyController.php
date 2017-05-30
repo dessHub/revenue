@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Report;
+use App\Property;
 use App\User;
 use Validator;
 use App\Http\Requests;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use SMSProvider;
 
-class ReportController extends Controller
+class PropertyController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,12 +27,17 @@ class ReportController extends Controller
 
      }
 
+     public function propertyform(Request $request) {
+         return view('propertyform');
+
+     }
+
      protected function postProperty(Request $request)
      {
 
       $rules = array(
               'location' => 'required|max:255',
-              'regNo' => 'required|max:255',
+              'registration' => 'required|max:255',
               'address' => 'required|max:255',
               'town' => 'required|max:255'
           );
@@ -46,7 +51,7 @@ class ReportController extends Controller
         $messages = $validator->messages();
 
         // redirect our user back to the form with the errors from the validator
-        return Redirect::to('/')
+        return Redirect::to('/propertyform')
             ->withErrors($validator);
 
     } else {
@@ -58,17 +63,18 @@ class ReportController extends Controller
         // create the data for report
         $property = new Property;
         $property->category     = Input::get('category');
+        $property->registration    = Input::get('registration');
         $property->location    = Input::get('location');
         $property->user_id = Input::get('user_id');
         $property->address  = Input::get('address');
         $property->town  = Input::get('town');
 
         // save report
-        $report->save();
+        $property->save();
 
         // redirect ----------------------------------------
         // redirect our user back to the form so they can do it all over again
-        return Redirect::to('/');
+        return Redirect::to('/home');
 
      }
    }

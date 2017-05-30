@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
-class Report extends Model
+class Property extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -13,7 +13,7 @@ class Report extends Model
      * @var array
      */
     protected $fillable = [
-      'id', 'user_id', 'fname', 'lname', 'admNo', 'school', 'status', 'guardian_fname', 'guardian_lname', 'guardian_phone', 'complaint'
+      'id', 'user_id', 'category', 'location', 'registration', 'address', 'town'
     ];
 
     /**

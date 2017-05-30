@@ -43,7 +43,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Shout
+                    Revenue App
                 </a>
             </div>
 
@@ -51,14 +51,13 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
-                    <li><a href="{{ url('/repay') }}">Repay</a></l
                     @if (Auth::guest())
-                      <li><a href="{{ url('/repa') }}">Repay</a></li>
+                      <li><a href="{{ url('/pay') }}">Pay Revenue</a></li>
                     @else
                        @if (Auth::user()->role == "normal")
                       <li><a href="{{ url('/report') }}">Launch Complaint</a></li>
                       <li><a href="{{ url('/myreports/'.Auth::user()->id) }}">My Complaints</a></li>
-                       @else
+                      @elseif(Auth::user()->role == 'admin')
                              <li class="dropdown">
                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                       View Reports<span class="caret"></span>
