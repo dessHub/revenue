@@ -22,24 +22,19 @@ class ReportController extends Controller
          $this->middleware('auth');
      }
 
-     public function showReport(Request $request) {
-         return view('report');
+     public function repay(Request $request) {
+         return view('repay');
 
      }
 
-     protected function postReport(Request $request)
+     protected function postProperty(Request $request)
      {
 
       $rules = array(
-              'admNo' => 'required|max:255',
-              'guardian_fname' => 'required|max:255',
-              'guardian_lname' => 'required|max:255',
-              'fname' => 'required|max:255',
-              'lname' => 'required|max:255',
-              'school' => 'required|max:255',
-              'guardian_phone' => 'required|max:255',
-              'user_id' => 'required|max:255',
-              'complaint' => 'required|min:20'
+              'location' => 'required|max:255',
+              'regNo' => 'required|max:255',
+              'address' => 'required|max:255',
+              'town' => 'required|max:255'
           );
 
           $validator = Validator::make(Input::all(), $rules);
@@ -51,7 +46,7 @@ class ReportController extends Controller
         $messages = $validator->messages();
 
         // redirect our user back to the form with the errors from the validator
-        return Redirect::to('report')
+        return Redirect::to('/')
             ->withErrors($validator);
 
     } else {
@@ -60,36 +55,20 @@ class ReportController extends Controller
         // report has passed all tests!
         // let him enter the database
 
-        $sms = "You have a new complaint.";
         // create the data for report
-        $report = new Report;
-        $report->fname     = Input::get('fname');
-        $report->lname    = Input::get('lname');
-        $report->user_id = Input::get('user_id');
-        $report->guardian_fname  = Input::get('guardian_fname');
-        $report->guardian_lname  = Input::get('guardian_lname');
-        $report->guardian_phone = Input::get('guardian_phone');
-        $report->admNo  = Input::get('admNo');
-        $report->school    = Input::get('school');
-        $report->complaint = Input::get('complaint');
-        $report->status = Input::get('status');
+        $property = new Property;
+        $property->category     = Input::get('category');
+        $property->location    = Input::get('location');
+        $property->user_id = Input::get('user_id');
+        $property->address  = Input::get('address');
+        $property->town  = Input::get('town');
 
         // save report
         $report->save();
 
-        $text = "$report->fname has file an abuse report.";
-
-
-         SMSProvider::sendMessage($report->guardian_phone, $text);
-         $admins = User::where('role','=','admin')->get();
-
-         foreach($admins as $admin) {
-        SMSProvider::sendMessage($admin->phoneNo, $sms);
-    }
-
         // redirect ----------------------------------------
         // redirect our user back to the form so they can do it all over again
-        return Redirect::to('report');
+        return Redirect::to('/');
 
      }
    }

@@ -25,11 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $pending = Report::where(['status' => "pending"])->count();
-        $rec = Report::where(['status' => "received"])->count();
-        $closed = Report::where(['status' => "closed"])->count();
-        $users = User::where(['role' => "normal"])->count();
 
-        return view('home')->with('report', $pending, 'rec', $rec)->with('rec', $rec)->with('closed', $closed)->with('users', $users);
+        return view('dashboard');
     }
 }

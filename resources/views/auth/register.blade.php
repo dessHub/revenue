@@ -10,8 +10,8 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">First Name</label>
+                        <div class="form-group{{ $errors->has('fname') ? ' has-error' : '' }}">
+                            <label for="fname" class="col-md-4 control-label">First Name</label>
 
                             <div class="col-md-6">
                                 <input id="fname" type="text" class="form-control" name="fname" value="{{ old('fname') }}">
@@ -24,8 +24,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Last Name</label>
+                        <div class="form-group{{ $errors->has('lname') ? ' has-error' : '' }}">
+                            <label for="lname" class="col-md-4 control-label">Last Name</label>
 
                             <div class="col-md-6">
                                 <input id="lname" type="text" class="form-control" name="lname" value="{{ old('lname') }}">
@@ -37,6 +37,20 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="form-group{{ $errors->has('identification') ? ' has-error' : '' }}">
+                            <label for="identification" class="col-md-4 control-label">ID/Passport No:</label>
+
+                            <div class="col-md-6">
+                                <input id="identification" type="text" class="form-control" name="identification" value="{{ old('identification') }}">
+                                @if ($errors->has('identification'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('identification') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
@@ -52,7 +66,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('phoneNo') ? ' has-error' : '' }}">
                             <label for="phoneNo" class="col-md-4 control-label">Mobile No:</label>
 
                             <div class="col-md-6">
